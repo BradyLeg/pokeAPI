@@ -56,6 +56,10 @@ export default function Item() {
     setInput("");
   }
 
+  function handleChange(value) {
+    setExtra(value);
+  }
+
 
   return (
     <main>
@@ -87,9 +91,8 @@ export default function Item() {
         <button type="submit">Search</button>
       </form>
       <select>
-        <option>Stats</option>
-        <option>Appearances</option>
-        <option>Characteristics</option>
+        <option value="none">none</option>
+        <option value="stats">stats</option>
       </select>
       <button onClick={() => fetchData()}>Catch a Random Pokémon</button>
     </main>

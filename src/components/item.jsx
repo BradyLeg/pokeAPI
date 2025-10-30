@@ -9,11 +9,11 @@ export default function Item() {
   const [clicked, setClicked] = React.useState(false);
   const [input, setInput] = React.useState("");
   const [isSearch, setIsSearch] = React.useState(false);
-  const [lastSearch, setLastSearch] = React.useState(""); 
-  
+  const [lastSearch, setLastSearch] = React.useState("");
+
   React.useEffect(() => {
     fetchData();
-    }, []);
+  }, []);
 
 
   function fetchData(name) {
@@ -21,18 +21,18 @@ export default function Item() {
     setError(null)
     setClicked(true)
     let endpoint;
- 
+
 
     if (name) {
       name = name.toLowerCase();
       endpoint = `https://pokeapi.co/api/v2/pokemon/${name}`;
-    } 
-    
+    }
+
     else {
       const randomNum = Math.floor(Math.random() * 1100) + 1;
       endpoint = `https://pokeapi.co/api/v2/pokemon/${randomNum}`;
     }
-    
+
     fetch(endpoint)
       .then((response) => response.json())
       .then((json) => setData(json))
@@ -46,8 +46,8 @@ export default function Item() {
     if (input.trim() === "") {
       setError(new Error("empty"));
       setLastSearch("");
-      setData(null);    
-      setClicked(false); 
+      setData(null);
+      setClicked(false);
       return;
     }
 
@@ -65,23 +65,21 @@ export default function Item() {
             ? `${lastSearch || "That Pokémon"} could not be found.`
             : "Something went wrong, please try again."}
           </p>)}
-        {data? 
+        {data ?
           <section>
-            <DataCard 
-              data = {data}
+            <DataCard
+              data={data}
             />
             <ImageCard
-              data ={data}
-            /> 
-            <ExtraInfo 
-              
+              data={data}
             />
-          </section>: (
-            clicked && !error ? <p>loading...</p>: null)}
+            <ExtraInfo stats={data.stats} />
+          </section> : (
+            clicked && !error ? <p>loading...</p> : null)}
       </div>
-      <form onSubmit={(event) => {formSubmit(event)}}>
-        <label>Enter a name to search: 
-          <input type="text" value={input} 
+      <form onSubmit={(event) => { formSubmit(event) }}>
+        <label>Enter a name to search:
+          <input type="text" value={input}
             onChange={(event) => setInput(event.target.value)}
             placeholder="pikachu">
           </input>

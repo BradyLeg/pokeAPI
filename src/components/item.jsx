@@ -1,6 +1,7 @@
 import React from "react";
 import DataCard from "./DataCard"
 import ImageCard from "./ImageCard"
+import ExtraInfo from "./ExtraInfo";
 
 export default function Item() {
   const [data, setData] = React.useState(null);
@@ -54,7 +55,8 @@ export default function Item() {
     fetchData(input);
     setInput("");
   }
-  
+
+
   return (
     <main>
       <div className="pokemon-card">
@@ -71,6 +73,9 @@ export default function Item() {
             <ImageCard
               data ={data}
             /> 
+            <ExtraInfo 
+              
+            />
           </section>: (
             clicked && !error ? <p>loading...</p>: null)}
       </div>
@@ -83,6 +88,11 @@ export default function Item() {
         </label>
         <button type="submit">Search</button>
       </form>
+      <select>
+        <option>Stats</option>
+        <option>Appearances</option>
+        <option>Characteristics</option>
+      </select>
       <button onClick={() => fetchData()}>Catch a Random Pokémon</button>
     </main>
   );
